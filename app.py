@@ -14,55 +14,112 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- Estilos Corporativos UHU ---
+# --- Estilos Corporativos UHU Agresivos ---
 def set_uhu_styles():
     import streamlit as st
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-    /* Colores UHU: Burdeos (#a90a2e), Negro (#000000), Blanco (#ffffff) */
+    /* Colores corporativos estrictos UHU */
     :root {
-        --uhu-burdeos: #a90a2e;
+        --uhu-granate: #A61B2B;
+        --uhu-granate-oscuro: #80101d;
         --uhu-blanco: #ffffff;
-        --uhu-negro: #000000;
-        --uhu-gris: #f4f4f4;
+        --uhu-gris-claro: #f5f5f5;
+        --uhu-gris-texto: #4a4a4a;
+        --uhu-negro: #222222;
     }
+    
+    /* Resetear fuentes de Streamlit por Open Sans */
     html, body, [class*="css"] {
         font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+        background-color: var(--uhu-blanco) !important;
+        color: var(--uhu-gris-texto) !important;
     }
+
+    /* Ocultar UI de Streamlit (Header, Footer, Menu) */
+    header {visibility: hidden !important;}
+    footer {visibility: hidden !important;}
+    #MainMenu {visibility: hidden !important;}
+    
+    /* Configurar el frame principal y el padding */
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 2rem !important;
+        max-width: 1200px !important;
+    }
+
+    /* Estilar Sidebar como menú lateral UHU */
+    section[data-testid="stSidebar"] {
+        background-color: var(--uhu-gris-claro) !important;
+        border-right: 1px solid #e0e0e0 !important;
+        padding-top: 2rem !important;
+    }
+    
+    /* Títulos principales (h1, h2, h3) */
+    h1, h2, h3 {
+        color: var(--uhu-granate) !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.5px !important;
+    }
+    
+    /* Botones principales rectangulares sin bordes (Estilo web UHU) */
     button[kind="primary"] {
-        background-color: var(--uhu-burdeos) !important;
+        background-color: var(--uhu-granate) !important;
         color: var(--uhu-blanco) !important;
-        border: None !important;
-        font-weight: bold !important;
-        transition: all 0.3s ease !important;
+        border: none !important;
+        border-radius: 0px !important; /* Cuadrados corporativos */
+        padding: 0.5rem 2rem !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        box-shadow: none !important;
+        transition: background-color 0.2s ease !important;
     }
     button[kind="primary"]:hover {
-        background-color: var(--uhu-negro) !important;
-        border: None !important;
-        transform: scale(1.02);
+        background-color: var(--uhu-granate-oscuro) !important;
+        border: none !important;
+        color: var(--uhu-blanco) !important;
     }
-    h1, h2, h3, h4 {
-        color: var(--uhu-burdeos) !important;
+
+    /* Inputs de texto estilo limpio */
+    input[type="text"], input[type="password"] {
+        border-radius: 0px !important;
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
     }
-    [data-testid="stMetricValue"] {
-        color: var(--uhu-burdeos) !important;
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: var(--uhu-granate) !important;
+        box-shadow: 0 0 0 1px var(--uhu-granate) !important;
     }
-    [data-testid="stSidebarUserContent"] h1,
-    [data-testid="stSidebarUserContent"] h2,
-    [data-testid="stSidebarUserContent"] h3 {
-        color: var(--uhu-burdeos) !important;
-    }
+
+    /* Barra de progreso en granate */
     .stProgress > div > div > div > div {
-        background-color: var(--uhu-burdeos) !important;
+        background-color: var(--uhu-granate) !important;
     }
-    div[data-testid="stSidebar"] {
-        border-right: 3px solid var(--uhu-burdeos);
-        background-color: #fcfcfc;
+    
+    /* Métricas del dashboard numeradas */
+    [data-testid="stMetricValue"] {
+        color: var(--uhu-granate) !important;
+        font-weight: 700 !important;
+        font-size: 2.5rem !important;
     }
-    /* Ocultar elementos default */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    
+    /* Alerta Disclaimer estilo corporativo */
+    .uhu-disclaimer {
+        background-color: var(--uhu-gris-claro);
+        border-left: 4px solid var(--uhu-granate);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        font-size: 0.9em;
+        color: var(--uhu-negro);
+    }
+    
+    /* Líneas separadoras */
+    hr {
+        border-top: 1px solid #e0e0e0 !important;
+        margin: 2rem 0 !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -543,22 +600,12 @@ st.markdown("""
 
 # --- Disclaimer ---
 st.markdown("""
-<div style="
-    background: #fff8e6;
-    border-left: 5px solid #a90a2e;
-    border-radius: 4px;
-    padding: 12px 16px;
-    margin: 12px 0 20px 0;
-    font-size: 0.85em;
-    color: #333;
-    line-height: 1.5;
-">
+<div class="uhu-disclaimer">
 <strong>⚠️ Aviso Legal y Limitaciones de uso</strong><br>
 Esta herramienta utiliza Inteligencia Artificial (Google Gemini) para analizar automáticamente el contenido público de sitios web universitarios. 
 Los resultados generados son <strong>meramente orientativos</strong> y no tienen carácter vinculante ni oficial. 
 No sustituyen la valoración experta de los evaluadores de la Agencia Andaluza del Conocimiento (ACCUA/DEVA) ni de ninguna otra agencia de calidad.<br>
-<span style="color:#666;">La Universidad de Huelva no se responsabiliza de las decisiones tomadas basándose exclusivamente en los resultados de esta herramienta. 
-El análisis está condicionado por el contenido accesible públicamente y por las páginas rastreadas, pudiendo existir información no detectada.</span>
+<span style="color:#666;">La Universidad de Huelva no se responsabiliza de las decisiones tomadas basándose en los resultados de esta herramienta.</span>
 </div>
 """, unsafe_allow_html=True)
 
