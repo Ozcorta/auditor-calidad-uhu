@@ -16,109 +16,69 @@ st.set_page_config(
 
 # --- Estilos Corporativos UHU Agresivos ---
 def set_uhu_styles():
-    import streamlit as st
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-    /* Colores corporativos estrictos UHU */
+    /* Estilos base */
+    html, body {
+        font-family: 'Open Sans', sans-serif !important;
+        background-color: #ffffff !important;
+        color: #4a4a4a !important;
+    }
+    
+    /* Variables */
     :root {
         --uhu-granate: #A61B2B;
-        --uhu-granate-oscuro: #80101d;
-        --uhu-blanco: #ffffff;
-        --uhu-gris-claro: #f5f5f5;
-        --uhu-gris-texto: #4a4a4a;
-        --uhu-negro: #222222;
-    }
-    
-    /* Resetear fuentes de Streamlit por Open Sans */
-    html, body, [class*="css"] {
-        font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-        background-color: var(--uhu-blanco) !important;
-        color: var(--uhu-gris-texto) !important;
+        --uhu-granate-osc: #80101d;
+        --uhu-gris: #f5f5f5;
     }
 
-    /* Ocultar UI de Streamlit (Header, Footer, Menu) */
-    header {visibility: hidden !important;}
-    footer {visibility: hidden !important;}
-    #MainMenu {visibility: hidden !important;}
+    /* Ocultar UI Streamlit */
+    header, footer, #MainMenu {visibility: hidden !important;}
     
-    /* Configurar el frame principal y el padding */
+    /* Contenedor principal */
     .block-container {
         padding-top: 1rem !important;
-        padding-bottom: 2rem !important;
         max-width: 1200px !important;
     }
 
-    /* Estilar Sidebar como menú lateral UHU */
+    /* Sidebar */
     section[data-testid="stSidebar"] {
-        background-color: var(--uhu-gris-claro) !important;
+        background-color: var(--uhu-gris) !important;
         border-right: 1px solid #e0e0e0 !important;
-        padding-top: 2rem !important;
     }
     
-    /* Títulos principales (h1, h2, h3) */
+    /* Tipografía */
     h1, h2, h3 {
         color: var(--uhu-granate) !important;
         font-weight: 700 !important;
-        letter-spacing: -0.5px !important;
     }
     
-    /* Botones principales rectangulares sin bordes (Estilo web UHU) */
+    /* Botones corporativos */
     button[kind="primary"] {
         background-color: var(--uhu-granate) !important;
-        color: var(--uhu-blanco) !important;
+        color: white !important;
+        border-radius: 0px !important;
         border: none !important;
-        border-radius: 0px !important; /* Cuadrados corporativos */
-        padding: 0.5rem 2rem !important;
-        font-weight: 600 !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        box-shadow: none !important;
-        transition: background-color 0.2s ease !important;
+        font-weight: 600 !important;
     }
     button[kind="primary"]:hover {
-        background-color: var(--uhu-granate-oscuro) !important;
-        border: none !important;
-        color: var(--uhu-blanco) !important;
+        background-color: var(--uhu-granate-osc) !important;
     }
 
-    /* Inputs de texto estilo limpio */
-    input[type="text"], input[type="password"] {
+    /* Inputs */
+    input {
         border-radius: 0px !important;
-        border: 1px solid #cccccc !important;
-        box-shadow: none !important;
-    }
-    input[type="text"]:focus, input[type="password"]:focus {
-        border-color: var(--uhu-granate) !important;
-        box-shadow: 0 0 0 1px var(--uhu-granate) !important;
     }
 
-    /* Barra de progreso en granate */
-    .stProgress > div > div > div > div {
-        background-color: var(--uhu-granate) !important;
-    }
-    
-    /* Métricas del dashboard numeradas */
-    [data-testid="stMetricValue"] {
-        color: var(--uhu-granate) !important;
-        font-weight: 700 !important;
-        font-size: 2.5rem !important;
-    }
-    
-    /* Alerta Disclaimer estilo corporativo */
+    /* Disclaimer */
     .uhu-disclaimer {
-        background-color: var(--uhu-gris-claro);
+        background-color: var(--uhu-gris);
         border-left: 4px solid var(--uhu-granate);
         padding: 1.5rem;
         margin-bottom: 2rem;
         font-size: 0.9em;
-        color: var(--uhu-negro);
-    }
-    
-    /* Líneas separadoras */
-    hr {
-        border-top: 1px solid #e0e0e0 !important;
-        margin: 2rem 0 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -539,13 +499,6 @@ def generate_pdf_report(df, titulo="", url="", compliance_rate=0):
 
 # --- Interfaz de Usuario ---
 # Forzar base clara mediante CSS si toml falla en algunos entornos
-st.markdown("""
-<style>
-    .stApp {
-        background-color: #ffffff;
-    }
-</style>
-""", unsafe_allow_html=True)
 set_uhu_styles()
 
 # --- Sidebar ---
