@@ -480,17 +480,26 @@ def generate_pdf_report(df, titulo="", url="", compliance_rate=0):
         return None
 
 
-# =====================================================
 # --- Interfaz de Usuario ---
-# =====================================================
-
+# Forzar base clara mediante CSS si toml falla en algunos entornos
+st.markdown("""
+<style>
+    .stApp {
+        background-color: #ffffff;
+    }
+</style>
+""", unsafe_allow_html=True)
 set_uhu_styles()
 
 # --- Sidebar ---
 with st.sidebar:
-    st.image("https://www.uhu.es/sites/default/files/2022-09/logo-UHU_0.png", use_container_width=True)
     st.markdown("""
-    <div style="background:#a90a2e;padding:12px;border-radius:4px;text-align:center;margin-bottom:20px;margin-top:10px;">
+    <div style="text-align:center; padding: 10px 0px 20px 0px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Firma_Color_Positivo_UHU.png" alt="Logo UHU" width="85%">
+    </div>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <div style="background:#a90a2e;padding:12px;border-radius:4px;text-align:center;margin-bottom:20px;margin-top:0px;">
         <div style="color:white;font-size:1.0em;font-weight:600;letter-spacing:0.5px;">Auditoría Institucional ACCUA</div>
     </div>
     """, unsafe_allow_html=True)
@@ -558,7 +567,7 @@ col1, col2 = st.columns([2, 1])
 with col1:
     url_input = st.text_input("🌐 URL del Sitio Web del Título", placeholder="https://www.uhu.es/titulacion/...")
 with col2:
-    titulo_nombre = st.text_input("📋 Nombre del Título (opcional)", placeholder="Ej: Grado en Enfermería")
+    titulo_nombre = st.text_input("📋 Nombre del Título (opcional)", placeholder="Ej: Grado en Ciencias del Deporte")
 
 # --- Selector de Checklist ---
 st.markdown("### 📝 Checklist de Requisitos")
