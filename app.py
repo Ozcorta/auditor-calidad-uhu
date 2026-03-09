@@ -9,8 +9,8 @@ import io
 
 # --- Configuración de la Página ---
 st.set_page_config(
-    page_title="AI Web Auditor · UHU",
-    page_icon="🕵️‍♂️",
+    page_title="Auditoría Web Calidad · UHU",
+    page_icon="🎓",
     layout="wide"
 )
 
@@ -58,7 +58,11 @@ def set_uhu_styles():
     }
     div[data-testid="stSidebar"] {
         border-right: 3px solid var(--uhu-burdeos);
+        background-color: #fcfcfc;
     }
+    /* Ocultar elementos default */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
     </style>
     """, unsafe_allow_html=True)
 
@@ -484,13 +488,12 @@ set_uhu_styles()
 
 # --- Sidebar ---
 with st.sidebar:
+    st.image("https://www.uhu.es/sites/default/files/2022-09/logo-UHU_0.png", use_container_width=True)
     st.markdown("""
-    <div style="background:#a90a2e;padding:18px 10px;border-radius:6px;text-align:center;margin-bottom:10px;">
-        <div style="color:white;font-size:1.1em;font-weight:700;letter-spacing:1px;">🎓 Universidad de Huelva</div>
-        <div style="color:#f8d0d7;font-size:0.78em;margin-top:4px;">Auditoría Web · ACCUA</div>
+    <div style="background:#a90a2e;padding:12px;border-radius:4px;text-align:center;margin-bottom:20px;margin-top:10px;">
+        <div style="color:white;font-size:1.0em;font-weight:600;letter-spacing:0.5px;">Auditoría Institucional ACCUA</div>
     </div>
     """, unsafe_allow_html=True)
-    st.markdown("---")
     st.header("⚙️ Configuración")
     api_key = st.text_input("Gemini API Key", type="password", help="Introduce tu clave API de Google Gemini.")
     
@@ -509,7 +512,7 @@ with st.sidebar:
             st.warning("Usando modelo por defecto.")
 
     st.divider()
-    st.markdown("### 🕷️ Rastreo Web")
+    st.markdown("### 🌐 Rastreo Web")
     max_pages = st.slider("Máx. páginas a analizar", min_value=1, max_value=20, value=5,
                           help="Número máximo de páginas internas que el bot visitará.")
 
@@ -522,8 +525,12 @@ with st.sidebar:
     """)
 
 # --- Área Principal ---
-st.title("🕵️‍♂️ AI Web Auditor · ACCUA")
-st.markdown("Verifica el cumplimiento de los requisitos de calidad ACCUA en la web de tu titulación en segundos.")
+st.markdown("""
+<div style="border-bottom: 2px solid #a90a2e; padding-bottom: 12px; margin-bottom: 20px;">
+    <h1 style="color: #a90a2e; font-size: 2.2em; font-weight: 700; margin-bottom: 0;">Plataforma de Auditoría Web de Calidad</h1>
+    <h3 style="color: #555; font-size: 1.2em; font-weight: 300; margin-top: 5px;">Herramienta automatizada para la verificación normativa de títulos</h3>
+</div>
+""", unsafe_allow_html=True)
 
 # --- Disclaimer ---
 st.markdown("""
@@ -621,7 +628,7 @@ st.markdown("---")
 if not api_key:
     st.warning("⚠️ Por favor, introduce tu **Gemini API Key** en el menú lateral para continuar.")
     
-analyze_btn = st.button("🚀 Analizar Sitio Web", type="primary",
+analyze_btn = st.button("▶️ Iniciar Auditoría", type="primary",
                         disabled=(not url_input or not checklist_items or not api_key))
 
 if analyze_btn:
@@ -632,7 +639,7 @@ if analyze_btn:
         st.session_state.url_history.insert(0, url_input)
         st.session_state.url_history = st.session_state.url_history[:5]
 
-    with st.spinner(f"🕷️ Rastreando sitio web (hasta {max_pages} páginas)..."):
+    with st.spinner(f"🌐 Rastreando sitio web (hasta {max_pages} páginas)..."):
         site_text = crawl_website(url_input, max_pages)
         
     if isinstance(site_text, str) and site_text.startswith("Error"):
@@ -643,7 +650,7 @@ if analyze_btn:
         with st.expander("📄 Ver texto extraído (debug)"):
             st.text(site_text[:2000] + "..." if len(site_text) > 2000 else site_text)
 
-        with st.spinner(f"🤖 Analizando cumplimiento con {selected_model}..."):
+        with st.spinner(f"⚙️ Analizando cumplimiento con {selected_model}..."):
             audit_results = analyze_compliance(site_text, checklist_items, api_key, selected_model)
 
         if isinstance(audit_results, dict) and "error" in audit_results:
