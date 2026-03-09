@@ -16,72 +16,65 @@ st.set_page_config(
 
 # --- Estilos Corporativos UHU Agresivos ---
 def set_uhu_styles():
-    st.markdown("""
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-    /* Estilos base */
-    html, body {
-        font-family: 'Open Sans', sans-serif !important;
-        background-color: #ffffff !important;
-        color: #4a4a4a !important;
-    }
-    
-    /* Variables */
-    :root {
-        --uhu-granate: #A61B2B;
-        --uhu-granate-osc: #80101d;
-        --uhu-gris: #f5f5f5;
-    }
+    st.markdown("""<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-    /* Ocultar UI Streamlit */
-    header, footer, #MainMenu {visibility: hidden !important;}
-    
-    /* Contenedor principal */
-    .block-container {
-        padding-top: 1rem !important;
-        max-width: 1200px !important;
-    }
+/* Estilos globales */
+html, body, [data-testid="stAppViewContainer"] {
+    font-family: 'Open Sans', sans-serif !important;
+    background-color: #ffffff !important;
+    color: #4a4a4a !important;
+}
 
-    /* Sidebar */
-    section[data-testid="stSidebar"] {
-        background-color: var(--uhu-gris) !important;
-        border-right: 1px solid #e0e0e0 !important;
-    }
-    
-    /* Tipografía */
-    h1, h2, h3 {
-        color: var(--uhu-granate) !important;
-        font-weight: 700 !important;
-    }
-    
-    /* Botones corporativos */
-    button[kind="primary"] {
-        background-color: var(--uhu-granate) !important;
-        color: white !important;
-        border-radius: 0px !important;
-        border: none !important;
-        text-transform: uppercase !important;
-        font-weight: 600 !important;
-    }
-    button[kind="primary"]:hover {
-        background-color: var(--uhu-granate-osc) !important;
-    }
+/* Ocultar elementos de Streamlit */
+header, footer, #MainMenu { visibility: hidden !important; }
 
-    /* Inputs */
-    input {
-        border-radius: 0px !important;
-    }
+/* Contenedor central */
+.block-container {
+    padding-top: 1rem !important;
+    max-width: 1200px !important;
+}
 
-    /* Disclaimer */
-    .uhu-disclaimer {
-        background-color: var(--uhu-gris);
-        border-left: 4px solid var(--uhu-granate);
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        font-size: 0.9em;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+/* Sidebar UHU Style */
+section[data-testid="stSidebar"] {
+    background-color: #f5f5f5 !important;
+    border-right: 1px solid #e0e0e0 !important;
+}
+
+/* Títulos granate */
+h1, h2, h3 {
+    color: #A61B2B !important;
+    font-weight: 700 !important;
+}
+
+/* Botones rectangulares */
+button[kind="primary"] {
+    background-color: #A61B2B !important;
+    color: white !important;
+    border-radius: 0px !important;
+    border: none !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+}
+button[kind="primary"]:hover {
+    background-color: #80101d !important;
+}
+
+/* Inputs de texto */
+div[data-baseweb="input"] {
+    border-radius: 0px !important;
+}
+
+/* Disclaimer institucional */
+.uhu-disclaimer {
+    background-color: #f5f5f5;
+    border-left: 4px solid #A61B2B;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9em;
+    color: #222222;
+}
+</style>""", unsafe_allow_html=True)
 
 # --- Checklists ACCUA predefinidas ---
 CHECKLISTS_ACCUA = {
@@ -503,16 +496,10 @@ set_uhu_styles()
 
 # --- Sidebar ---
 with st.sidebar:
-    st.markdown("""
-    <div style="text-align:center; padding: 10px 0px 20px 0px;">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Firma_Color_Positivo_UHU.png" alt="Logo UHU" width="85%">
-    </div>
-    """, unsafe_allow_html=True)
-    st.markdown("""
-    <div style="background:#a90a2e;padding:12px;border-radius:4px;text-align:center;margin-bottom:20px;margin-top:0px;">
-        <div style="color:white;font-size:1.0em;font-weight:600;letter-spacing:0.5px;">Auditoría Institucional ACCUA</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("""<div style="text-align:center; padding: 10px 0px 20px 0px;"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Firma_Color_Positivo_UHU.png" alt="Logo UHU" width="85%"></div>""", unsafe_allow_html=True)
+
+    st.markdown("""<div style="background:#a90a2e;padding:12px;border-radius:4px;text-align:center;margin-bottom:20px;margin-top:0px;"><div style="color:white;font-size:1.0em;font-weight:600;letter-spacing:0.5px;">Auditoría Institucional ACCUA</div></div>""", unsafe_allow_html=True)
+
     st.header("⚙️ Configuración")
     api_key = st.text_input("Gemini API Key", type="password", help="Introduce tu clave API de Google Gemini.")
     
@@ -544,12 +531,8 @@ with st.sidebar:
     """)
 
 # --- Área Principal ---
-st.markdown("""
-<div style="border-bottom: 2px solid #a90a2e; padding-bottom: 12px; margin-bottom: 20px;">
-    <h1 style="color: #a90a2e; font-size: 2.2em; font-weight: 700; margin-bottom: 0;">Plataforma de Auditoría Web de Calidad</h1>
-    <h3 style="color: #555; font-size: 1.2em; font-weight: 300; margin-top: 5px;">Herramienta automatizada para la verificación normativa de títulos</h3>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("""<div style="border-bottom: 2px solid #a90a2e; padding-bottom: 12px; margin-bottom: 20px;"><h1 style="color: #a90a2e; font-size: 2.2em; font-weight: 700; margin-bottom: 0;">Plataforma de Auditoría Web de Calidad</h1><h3 style="color: #555; font-size: 1.2em; font-weight: 300; margin-top: 5px;">Herramienta automatizada para la verificación normativa de títulos</h3></div>""", unsafe_allow_html=True)
+
 
 # --- Disclaimer ---
 st.markdown("""
